@@ -4,6 +4,8 @@ import { connectDB } from "./config/db.js";
 import { clerkMiddleware } from '@clerk/express'
 import path from "path"
 import webhookRoutes from "./routes/webhook.routes.js";
+import adminRoutes from "./routes/admin.route.js";
+import userRoutes from "./routes/user.route.js";
 
 
 const app = express();
@@ -17,8 +19,9 @@ app.get("/api/health", (req, res) => {
 
   res.json({ message: "ok" })
 })
-
+app.use("/api/admin",adminRoutes)
 app.use("/webhook", webhookRoutes)
+app.use("/api/users",userRoutes)
 
 
 if (ENV.NODE_ENV == "production") {
