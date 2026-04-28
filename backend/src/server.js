@@ -10,11 +10,14 @@ import orderRoutes from "./routes/order.route.js";
 import reviewRoutes from "./routes/review.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import productRoutes from "./routes/product.route.js";
+import cartRoutes from "./routes/cart.route.js";
+import cors from "cors"
 
 
 const app = express();
 app.use(clerkMiddleware())
 app.use(express.json())
+app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 
 
 const __dirname = path.resolve();
@@ -30,6 +33,7 @@ app.use("/api/order", orderRoutes)
 app.use("/api/review", reviewRoutes)
 app.use("/api/products", productRoutes)
 app.use("/api/payment", paymentRoutes);
+app.use("/api/cart", cartRoutes);
 
 
 if (ENV.NODE_ENV == "production") {
