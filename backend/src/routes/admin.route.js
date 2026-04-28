@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { adminOnly, protectRoute } from "../middleware/auth.middleware";
-import { createProducts, deleteProduct, getAllOrders, getAllProducts, updateOrderStatus, updateProduct } from "../controllers/admin.controller";
-import { upload } from "../middleware/multer.middleware";
+import { adminOnly, protectRoute } from "../middleware/auth.middleware.js";
+import { createProducts, deleteProduct, getAllCustomers, getAllOrders, getAllProducts, getDashboardStats, updateOrderStatus, updateProduct } from "../controllers/admin.controller.js";
+import { upload } from "../middleware/multer.middleware.js";
 
 
 const router = Router();

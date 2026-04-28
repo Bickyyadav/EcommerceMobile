@@ -1,9 +1,9 @@
-import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
+// import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
 
 function App() {
   return (
     <>
-      <header>
+      {/* <header>
         <Show when="signed-out">
           <SignInButton />
           <SignUpButton />
@@ -11,7 +11,10 @@ function App() {
         <Show when="signed-in">
           <UserButton />
         </Show>
-      </header>
+      </header> */}
+      <h1 className="text-3xl font-bold underline text-red-600">
+        Hello world!
+      </h1>
     </>
   )
 }
