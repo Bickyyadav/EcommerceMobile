@@ -7,6 +7,9 @@ import webhookRoutes from "./routes/webhook.routes.js";
 import adminRoutes from "./routes/admin.route.js";
 import userRoutes from "./routes/user.route.js";
 import orderRoutes from "./routes/order.route.js";
+import reviewRoutes from "./routes/review.routes.js";
+import paymentRoutes from "./routes/payment.routes.js";
+import productRoutes from "./routes/product.route.js";
 
 
 const app = express();
@@ -20,10 +23,13 @@ app.get("/api/health", (req, res) => {
 
   res.json({ message: "ok" })
 })
-app.use("/api/admin",adminRoutes)
+app.use("/api/admin", adminRoutes)
 app.use("/webhook", webhookRoutes)
-app.use("/api/users",userRoutes)
-app.use("/api/order",orderRoutes)
+app.use("/api/users", userRoutes)
+app.use("/api/order", orderRoutes)
+app.use("/api/review", reviewRoutes)
+app.use("/api/products", productRoutes)
+app.use("/api/payment", paymentRoutes);
 
 
 if (ENV.NODE_ENV == "production") {
