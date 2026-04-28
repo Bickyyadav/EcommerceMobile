@@ -1,6 +1,7 @@
 import { requireAuth } from "@clerk/express";
 import { User } from "../models/user.model.js";
-import { ENV } from "../config/env.js";
+
+
 
 
 export const protectRoute = [
@@ -11,7 +12,7 @@ export const protectRoute = [
             if (!clerkId) return res.status(401).json({ message: "Unauthorized - invalid token" });
 
             let user = await User.findOne({ clerkId });
-            
+
             // Note: If user is null, it might be because the webhook hasn't processed yet.
             // You can either return an error or handle it as "not fully synced".
             if (!user) {
@@ -26,3 +27,14 @@ export const protectRoute = [
         }
     },
 ];
+
+export const adminOnly = async (req, res, next) => {
+    if (!req.user) {
+        return res.status(401).json({ message: "Unauthorized - user not found" });
+    }
+    if (req.user.email !== ENV.ADMIN_EMAIL) {
+        return res.status(403).json({ message: "Forbidden - admin access only" });
+    }
+
+    next();
+}
