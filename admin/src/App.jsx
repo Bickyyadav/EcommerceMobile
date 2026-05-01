@@ -1,20 +1,29 @@
 // import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
 
+import { Routes } from "react-router"
+import { useAuth } from "@clerk/react"
+import PageLoader from "./components/PageLoader"
+
 function App() {
   return (
     <>
-      {/* <header>
-        <Show when="signed-out">
-          <SignInButton />
-          <SignUpButton />
-        </Show>
-        <Show when="signed-in">
-          <UserButton />
-        </Show>
-      </header> */}
-      <h1 className="text-3xl font-bold underline text-red-600">
-        Hello world!
-      </h1>
+
+      const {isSignedIn, isLoaded} = useAuth();
+
+      if (!isLoaded) return <PageLoader />;
+
+
+
+      <Routes>
+        <Route path="/login" element={isSignedIn ? <Navigate to={"/dashboard"} /> : <LoginPage />} />
+        <Route path="/" element={isSignedIn ? <DashboardLayout /> : <Navigate to={"/login"} />}>
+          <Route index element={<Navigate to={"dashboard"} />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="products" element={<ProductsPage />} />
+          <Route path="orders" element={<OrdersPage />} />
+          <Route path="customers" element={<CustomersPage />} />
+        </Route>
+      </Routes>
     </>
   )
 }
