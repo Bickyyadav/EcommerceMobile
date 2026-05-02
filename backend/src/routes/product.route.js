@@ -5,6 +5,7 @@ import { getProductById } from "../controllers/product.controller.js";
 
 const router = Router();
 
+// router.get("/", getAllProducts);
 router.get("/", protectRoute, getAllProducts);
 router.get("/:id", protectRoute, getProductById);
 

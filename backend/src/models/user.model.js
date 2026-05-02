@@ -60,7 +60,7 @@ const userSchema = new mongoose.Schema({
     },
     addresses: [addresSchema],
     // this is called live product how many product has liked by the user and this is store the product id [1213,141,541541]
-    wishList: [{
+    wishlist: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product",
     }],

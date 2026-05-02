@@ -21,6 +21,7 @@ app.use(express.json())
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true })); //credentaisl true allow the browser to send cookies from the frontend 
 
 
+
 const __dirname = path.resolve();
 
 app.get("/api/health", (req, res) => {

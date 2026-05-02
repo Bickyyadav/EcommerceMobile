@@ -104,8 +104,16 @@ export async function deleteAddress(req, res) {
 
 export async function addToWishlist(req, res) {
     try {
+        console.log("➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕")
+        console.log(req.body);
         const { productId } = req.body;
         const user = req.user;
+
+        // ✅ FIX: ensure wishlist exists
+        if (!user.wishlist) {
+            user.wishlist = [];
+        }
+
 
         // check if product is already in the wishlist
         if (user.wishlist.includes(productId)) {

@@ -45,7 +45,9 @@ export async function createProducts(req, res) {
 export async function getAllProducts(req, res) {
     try {
         // -1 means in desc order: most recent products first
+        console.log("😁😁");
         const products = await Product.find().sort({ createdAt: -1 });
+
         res.status(200).json(products);
     } catch (error) {
         console.error("Error fetching products:", error);
