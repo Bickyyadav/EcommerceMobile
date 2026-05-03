@@ -102,6 +102,7 @@ export async function deleteAddress(req, res) {
     }
 }
 
+
 export async function addToWishlist(req, res) {
     try {
         console.log("➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕")
