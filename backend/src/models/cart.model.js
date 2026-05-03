@@ -15,7 +15,6 @@ const cartItemSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
-
 const cartSchema = new mongoose.Schema(
     {
         user: {

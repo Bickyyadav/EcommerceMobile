@@ -19,7 +19,7 @@ const ProfileScreen = () => {
 
   const handleMenuPress = (action: (typeof MENU_ITEMS)[number]['action']) => {
     if (action == "/profile") return;
-    // router.push(action)
+    router.push(action)
   }
   return (
     <SafeScreen>
@@ -50,6 +50,7 @@ const ProfileScreen = () => {
             </View>
           </View>
         </View>
+
         {/* Menu Items */}
         <View className=' flex-row flex-wrap gap-2 mx-6 mb-3'>
           {MENU_ITEMS.map(item => (
@@ -68,6 +69,7 @@ const ProfileScreen = () => {
           ))
           }
         </View>
+
         {/* NOTIFICATONS BTN */}
         <View className="mb-3 mx-6 bg-surface rounded-2xl p-4">
           <TouchableOpacity
@@ -87,7 +89,7 @@ const ProfileScreen = () => {
           <TouchableOpacity
             className="flex-row items-center justify-between py-2"
             activeOpacity={0.7}
-          // onPress={() => router.push("/privacy-security")}
+            onPress={() => router.push("/privacy-security")}
           >
             <View className="flex-row items-center">
               <Ionicons name="shield-checkmark-outline" size={22} color="#FFFFFF" />
@@ -96,6 +98,7 @@ const ProfileScreen = () => {
             <Ionicons name="chevron-forward" size={20} color="#666" />
           </TouchableOpacity>
         </View>
+
         {/* SIGNOUT BTN */}
         <TouchableOpacity
           className="mx-6 mb-3 bg-surface rounded-2xl py-5 flex-row items-center justify-center border-2 border-red-500/20"

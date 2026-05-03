@@ -44,7 +44,7 @@ const useWishlist = () => {
     };
 
     return {
-        wishlist: wishlist || [],
+        wishlist: wishlist?.wishlist || [],
         isLoading,
         isError,
         wishlistCount: wishlist?.wishlist?.length || 0,

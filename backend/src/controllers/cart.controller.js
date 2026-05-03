@@ -23,6 +23,7 @@ export async function getCart(req, res) {
     }
 }
 
+
 export async function addToCard(req, res) {
     try {
         // by default why we have wrote because in ui we have + button sign so it add 1 by 1 
@@ -71,10 +72,7 @@ export async function addToCard(req, res) {
         console.error("Error in addToCart controller:", error);
         res.status(500).json({ error: "Internal server error" });
     }
-
 }
-
-
 
 
 export async function updateCartItem(req, res) {
@@ -113,7 +111,6 @@ export async function updateCartItem(req, res) {
     } catch (error) {
         console.error("Error in updateCartItem controller:", error);
         res.status(500).json({ error: "Internal server error" });
-
     }
 }
 

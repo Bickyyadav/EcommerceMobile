@@ -71,4 +71,5 @@ const useCart = () => {
         isClearing: clearCartMutation.isPending,
     };
 };
+
 export default useCart;

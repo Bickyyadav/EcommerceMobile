@@ -38,6 +38,7 @@ app.use("/api/products", productRoutes)
 app.use("/api/cart", cartRoutes);
 
 
+
 if (ENV.NODE_ENV == "production") {
   app.use(express.static(path.join(__dirname, '../admin/dist')));
   app.get("/{*any}", (req, res) => {
