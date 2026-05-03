@@ -28,8 +28,7 @@ function WishList() {
 
     if (isLoading) return <LoadingUI />;
     if (isError) return <ErrorUI />;
-
-
+  
     const handleRemoveFromWishlist = (productId: string, productName: string) => {
         removeFromWishlist(
             productId,
@@ -41,7 +40,6 @@ function WishList() {
             }
         )
     }
-
 
     return (
         <SafeScreen>
