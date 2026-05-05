@@ -40,6 +40,7 @@ export async function addAddress(req, res) {
 }
 
 export async function getAddresses(req, res) {
+    console.log("🔴🔴🔴🔴🔴");
     try {
         const user = req.user;
         res.status(200).json({ addresses: user.addresses });

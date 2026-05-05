@@ -11,7 +11,6 @@ const api = axios.create({
     },
 });
 
-
 export const useApi = () => {
     const { getToken } = useAuth();
     console.log("💦💦💦💦💦💦");
@@ -34,7 +33,6 @@ export const useApi = () => {
             api.interceptors.request.eject(interceptor);
         };
     }, [getToken]);
-
 
     return api
 }
