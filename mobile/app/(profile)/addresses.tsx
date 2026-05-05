@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import SafeScreen from '../components/SafeScreen'
-import { ActivityIndicator, Alert, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { useAddressess } from '@/hooks/useAddressess';
 import { Ionicons } from '@expo/vector-icons';
 import AddressesHeader from '../components/AddressesHeader';
 import { Address } from '@/types';
 import AddressFormModal from '../components/AddressFormModal';
+import AddressCard from '../components/AddressCard';
 
 function Addresses() {
     const {
@@ -36,7 +37,7 @@ function Addresses() {
     if (isLoading) return <LoadingUI />;
     if (isError) return <ErrorUI />;
 
-    
+
     const handleAddAddress = () => {
         setShowAddressForm(true)
         setEditingAddressId(null);
@@ -146,7 +147,35 @@ function Addresses() {
                         <Text className="text-background font-bold text-base">Add Address</Text>
                     </TouchableOpacity>
                 </View>) : (
-                    <Text className='text-white'>fasfasdfaf</Text>
+                    <ScrollView
+                        className="flex-1"
+                        showsVerticalScrollIndicator={false}
+                        contentContainerStyle={{ paddingBottom: 100 }}
+                    >
+                        <View className="px-6 py-4">
+                            {addresses.map((address) => (
+                                <AddressCard
+                                    key={address._id}
+                                    address={address}
+                                    onEdit={handleEditAddress}
+                                    onDelete={handleDeleteAddress}
+                                    isUpdatingAddress={isUpdatingAddress}
+                                    isDeletingAddress={isDeletingAddress}
+                                />
+                            ))}
+
+                            <TouchableOpacity
+                                className="bg-primary rounded-2xl py-4 items-center mt-2"
+                                activeOpacity={0.8}
+                                onPress={handleAddAddress}
+                            >
+                                <View className="flex-row items-center">
+                                    <Ionicons name="add-circle-outline" size={24} color="#121212" />
+                                    <Text className="text-background font-bold text-base ml-2">Add New Address</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
                 )}
             <AddressFormModal
                 visible={showAddressForm}

@@ -106,8 +106,6 @@ export async function deleteAddress(req, res) {
 
 export async function addToWishlist(req, res) {
     try {
-        console.log("➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕➕")
-        console.log(req.body);
         const { productId } = req.body;
         const user = req.user;
 
