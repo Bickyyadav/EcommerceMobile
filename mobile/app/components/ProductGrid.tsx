@@ -35,13 +35,11 @@ const ProductGrid = ({ isLoading, isError, products }: ProductsGridProps) => {
 
     const renderProduct = ({ item: product }: { item: Product }) => (
 
-        console.log("))))))))))))))))))))"),
-        console.log(product),
         <TouchableOpacity
             className="bg-surface rounded-3xl overflow-hidden mb-3"
             style={{ width: "48%" }}
             activeOpacity={0.8}
-            // onPress={() => router.push(`/product/${product._id}`)}
+            onPress={() => router.push(`/product/${product._id}`)}
         >
             <View className="relative">
                 <Image
@@ -129,7 +127,7 @@ const ProductGrid = ({ isLoading, isError, products }: ProductsGridProps) => {
             keyExtractor={(item) => item._id}
             numColumns={2}
             showsVerticalScrollIndicator={false}
-            columnWrapperStyle={{ justifyContent: "space-between" }} 
+            columnWrapperStyle={{ justifyContent: "space-between" }}
             scrollEnabled={false}
             ListEmptyComponent={NoProductsFound}
         />
