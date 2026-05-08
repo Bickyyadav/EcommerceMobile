@@ -7,8 +7,6 @@ export const protectRoute = [
     requireAuth(),
     async (req, res, next) => {
         try {
-            console.log("💦💦💦💦💦💦");
-
             const authState = getAuth(req);
             console.log("Auth State:", authState.userId);
             const clerkId = authState.userId;
