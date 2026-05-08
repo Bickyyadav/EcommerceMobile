@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
 const addresSchema = new mongoose.Schema({
-    //label should be is you addrss is howe or office or bussinces office 
+    //label should be is you address is home or office or business office 
     label: {
         type: String,
         required: true,
@@ -57,6 +57,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
+    },
+    stripeCustomerId: {
+        type: String,
+        default: "",
     },
     addresses: [addresSchema],
     // this is called live product how many product has liked by the user and this is store the product id [1213,141,541541]

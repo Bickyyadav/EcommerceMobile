@@ -42,6 +42,7 @@ export async function createProducts(req, res) {
     }
 }
 
+
 export async function getAllProducts(req, res) {
     try {
         // -1 means in desc order: most recent products first
@@ -65,6 +66,7 @@ export async function updateProduct(req, res) {
         }
         if (name) product.name = name;
         if (description) product.description = description;
+        //And an admin tried to set the price of a product to 0 (maybe for a free giveaway or a mistake), the code if (0) would evaluate to false. The price would never be updated!By using price !== undefined, you are saying: "As long as the user actually sent a price in the request, update it—even if that price is 0."
         if (price !== undefined) product.price = parseFloat(price);
         if (stock !== undefined) product.stock = parseInt(stock);
         if (category) product.category = category;
@@ -116,7 +118,9 @@ export async function updateOrderStatus() {
         if (!order) {
             return res.status(404).json({ error: "Order not found" });
         }
+
         order.status = status;
+        // If an admin toggles statuses back and forth (e.g., changing from shipped to pending then back to shipped), you usually only want to know the very first time it was shipped. The ! check ensures that once a date is recorded, it "locks in" and doesn't jump forward every time the admin makes a minor edit to the order.
         if (status === "shipped" && !order.shippedAt) {
             order.shippedAt = new Date();
         }
@@ -146,6 +150,7 @@ export async function getAllCustomers() {
         res.status(500).json({ message: "Internal server error" });
     }
 }
+
 
 
 export async function getDashboardStats() {
@@ -187,7 +192,6 @@ export async function deleteProduct(req, res) {
             return res.status(404).json({ message: "Product not found" });
         }
         // Delete images from Cloudinary
-        // Delete images from Cloudinary
         if (product.images && product.images.length > 0) {
             const deletePromises = product.images.map((imageUrl) => {
                 // Extract public_id from URL (assumes format: .../products/publicId.ext)
@@ -196,6 +200,7 @@ export async function deleteProduct(req, res) {
             });
             await Promise.all(deletePromises.filter(Boolean));
         }
+        
 
         await Product.findByIdAndDelete(id);
         res.status(200).json({ message: "Product deleted successfully" });

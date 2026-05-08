@@ -47,9 +47,10 @@ export async function getAddresses(req, res) {
     } catch (error) {
         console.error("Error in getAddresses controller:", error);
         res.status(500).json({ error: "Internal server error" });
-
     }
 }
+
+
 
 export async function updateAddress(req, res) {
     try {
@@ -113,6 +114,7 @@ export async function addToWishlist(req, res) {
         if (!user.wishlist) {
             user.wishlist = [];
         }
+        
 
         // check if product is already in the wishlist
         if (user.wishlist.includes(productId)) {
