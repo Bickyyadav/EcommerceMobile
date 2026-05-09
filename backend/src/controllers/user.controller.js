@@ -2,6 +2,7 @@
 
 import { User } from "../models/user.model.js";
 
+
 export async function addAddress(req, res) {
     try {
         const { label, fullName, streetAddress, city, state, zipCode, phoneNumber, isDefault } = req.body;
