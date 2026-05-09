@@ -26,6 +26,7 @@ export async function createReview(req, res) {
             return res.status(400).json({ error: "Can only review delivered orders" });
         }
 
+
         // verify product is in the order
         const productInOrder = order.orderItems.find(
             (item) => item.product.toString() === productId.toString()
@@ -34,16 +35,19 @@ export async function createReview(req, res) {
             return res.status(400).json({ error: "Product not found in this order" });
         }
 
-        // atomic update or create
+        // atomic update or create OR Update Review
         const review = await Review.findOneAndUpdate(
             { productId, userId: user._id },
-            { rating, orderId, productId, userId: user._id },
-            { new: true, upsert: true, runValidators: true }
+            { rating, orderId, productId, userId: user._id }, //Data To Save in db
+            { new: true, upsert: true, runValidators: true }  //Return updated document. upsert=true if review exists → UPDATE if review does not exist → CREATE
         );
 
         // update the product rating with atomic aggregation
+        //fetching all reviews to calcualte
         const reviews = await Review.find({ productId });
+        //reduce calculate the average rating 
         const totalRating = reviews.reduce((sum, rev) => sum + rev.rating, 0);
+        // Update Product Average Rating
         const updatedProduct = await Product.findByIdAndUpdate(
             productId,
             {
@@ -95,3 +99,16 @@ export async function deleteReview(req, res) {
 
     }
 }
+
+
+
+// 1. User sends rating
+// 2. Check rating valid
+// 3. Check order exists
+// 4. Check order belongs to user
+// 5. Check order delivered
+// 6. Check product was actually bought
+// 7. Create/update review
+// 8. Recalculate average rating
+// 9. Update product
+// 10. Send success response

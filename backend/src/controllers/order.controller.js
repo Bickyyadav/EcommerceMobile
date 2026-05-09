@@ -1,5 +1,6 @@
-
-
+import { Order } from "../models/order.model.js";
+import { Product } from "../models/product.model.js";
+import { Review } from "../models/review.model.js";
 
 export async function createOrder(req, res) {
     try {
@@ -8,6 +9,7 @@ export async function createOrder(req, res) {
         if (!orderItems || orderItems.length === 0) {
             return res.status(400).json({ error: "No order items" });
         }
+
         // validate products and stock
         for (const item of orderItems) {
             const product = await Product.findById(item.product._id);
@@ -18,6 +20,7 @@ export async function createOrder(req, res) {
                 return res.status(400).json({ error: `Insufficient stock for ${product.name}` });
             }
         }
+
 
         const order = await Order.create({
             user: user._id,
@@ -51,9 +54,9 @@ export async function getUserOrders(req, res) {
             .sort({ createdAt: -1 });
 
         // check if each order has been reviewed
-
         const orderIds = orders.map((order) => order._id);
         const reviews = await Review.find({ orderId: { $in: orderIds } });
+        //Set: Removes Duplicates: If an order was reviewed twice, it only keeps the ID once.
         const reviewedOrderIds = new Set(reviews.map((review) => review.orderId.toString()));
 
         const ordersWithReviewStatus = await Promise.all(
@@ -63,7 +66,11 @@ export async function getUserOrders(req, res) {
                     hasReviewed: reviewedOrderIds.has(order._id.toString()),
                 };
             })
+
+
         );
+        
+
 
         res.status(200).json({ orders: ordersWithReviewStatus });
 
