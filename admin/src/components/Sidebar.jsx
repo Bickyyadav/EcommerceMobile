@@ -1,7 +1,8 @@
-import { useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/react";
 import { ShoppingBagIcon } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { NAVIGATION } from "./Navbar";
+
 
 function Sidebar() {
     const location = useLocation();

@@ -135,6 +135,7 @@ export async function removeFromCart(req, res) {
     }
 }
 
+
 export const clearCart = async (req, res) => {
     try {
         const cart = await Cart.findOne({ clerkId: req.user.clerkId });

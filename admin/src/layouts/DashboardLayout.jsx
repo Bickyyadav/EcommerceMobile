@@ -15,6 +15,6 @@ function DashboardLayout() {
       <Sidebar />
     </div>
   );
- };
+};
 
 export default DashboardLayout;

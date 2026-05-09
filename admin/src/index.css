@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @plugin "daisyui" {
-  themes: "forest",
-}
+  themes: "forest";
+};
 
-;
+
