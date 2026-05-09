@@ -1,7 +1,11 @@
 @import "tailwindcss";
+@plugin "daisyui/index.js";
 
-@plugin "daisyui" {
-  themes: "forest";
-};
+@layer base {
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+}
 
 

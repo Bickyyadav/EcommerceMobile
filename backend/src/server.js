@@ -12,6 +12,9 @@ import paymentRoutes from "./routes/payment.route.js";
 import productRoutes from "./routes/product.route.js";
 import cartRoutes from "./routes/cart.route.js";
 import cors from "cors"
+import dotenv from "dotenv"
+dotenv.config()
+
 
 const app = express();
 app.use(clerkMiddleware()) //this will add the auth object under the req => req.auth inside the admin.route.js file

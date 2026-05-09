@@ -1,5 +1,7 @@
 import { Order } from "../models/order.model.js";
 import { Product } from "../models/product.model.js";
+import cloudinary from "../config/cloudinary.js";
+import { User } from "../models/user.model.js";
 
 export async function createProducts(req, res) {
     try {
@@ -107,7 +109,7 @@ export async function getAllOrders(req, res) {
 }
 
 
-export async function updateOrderStatus() {
+export async function updateOrderStatus(req, res) {
     try {
         const { orderId } = req.params;
         const { status } = req.body;
@@ -141,7 +143,7 @@ export async function updateOrderStatus() {
 }
 
 
-export async function getAllCustomers() {
+export async function getAllCustomers(req, res) {
     try {
         const customers = await User.find().sort({ createdAt: -1 });
         res.status(200).json({ customers });
@@ -153,7 +155,8 @@ export async function getAllCustomers() {
 
 
 
-export async function getDashboardStats() {
+
+export async function getDashboardStats(req, res) {
     try {
         //countDocuments will count the number of documents in the collection
         const totalOrders = await Order.countDocuments();
@@ -165,8 +168,9 @@ export async function getDashboardStats() {
                 },
             },
         ])
-        const totalRevenue = revenueResult[0]?.total || 0;
         // this is how we calculate the total revenue
+        const totalRevenue = revenueResult[0]?.total || 0;
+        //this is how we count the total customers
         const totalCustomers = await User.countDocuments();
         // same way we count the total products
         const totalProducts = await Product.countDocuments();
@@ -200,7 +204,7 @@ export async function deleteProduct(req, res) {
             });
             await Promise.all(deletePromises.filter(Boolean));
         }
-        
+
 
         await Product.findByIdAndDelete(id);
         res.status(200).json({ message: "Product deleted successfully" });

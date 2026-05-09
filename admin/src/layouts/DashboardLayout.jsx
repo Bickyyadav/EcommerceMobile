@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 
 function DashboardLayout() {
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open min-h-screen">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" defaultChecked />
       <div className="drawer-content">
         <Navbar />
@@ -18,3 +18,4 @@ function DashboardLayout() {
 };
 
 export default DashboardLayout;
+
