@@ -30,8 +30,8 @@ const ProductGrid = ({ isLoading, isError, products }: ProductsGridProps) => {
                 },
             }
         );
-        
     }
+    
 
 
 

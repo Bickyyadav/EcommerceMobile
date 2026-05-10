@@ -130,8 +130,6 @@ function PrivacySecurity() {
     }
 
 
-
-
     return (
         <SafeScreen>
             {/* HEADER */}

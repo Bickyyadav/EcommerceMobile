@@ -53,7 +53,6 @@ function Addresses() {
         })
     }
 
-
     const handleEditAddress = (address: Address) => {
         setShowAddressForm(true);
         setEditingAddressId(address._id);
@@ -70,13 +69,13 @@ function Addresses() {
 
     }
 
-
     const handleDeleteAddress = (addressId: string, label: string) => {
         Alert.alert("Delete Address", `Are you sure you want to delete ${label}`, [
             { text: "Cancel", style: "cancel" },
             { text: "Delete", style: "destructive", onPress: () => deleteAddress(addressId) },
         ]);
     }
+
     const handleSaveAddress = () => {
         if (!addressForm.label ||
             !addressForm.fullName ||
@@ -105,7 +104,6 @@ function Addresses() {
                         Alert.alert("Error", error?.response?.data?.error || "Failed to update address");
                     },
                 }
-
             )
         } else {
             //create new address 
@@ -126,8 +124,6 @@ function Addresses() {
         setShowAddressForm(false);
         setEditingAddressId(null);
     }
-
-
 
     return (
         <SafeScreen>
@@ -189,7 +185,6 @@ function Addresses() {
         </SafeScreen >
     )
 }
-
 
 
 export default Addresses

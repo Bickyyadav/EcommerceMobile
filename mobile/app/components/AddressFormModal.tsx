@@ -143,6 +143,7 @@ const AddressFormModal = ({ addressForm,
                                 <Text className="text-text-primary font-semibold">Set as default address</Text>
                                 <Switch
                                     value={addressForm.isDefault}
+                                    // When you tap it, 'value' becomes 'true' automatically
                                     onValueChange={(value) => onFormChange({ ...addressForm, isDefault: value })}
                                     thumbColor="white"
                                 />
