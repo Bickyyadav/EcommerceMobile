@@ -5,6 +5,7 @@ import { Product } from "../models/product.model.js";
 import { Order } from "../models/order.model.js";
 import { Cart } from "../models/cart.model.js";
 
+
 const stripe = new Stripe(ENV.STRIPE_SECRET_KEY);
 
 export async function createPaymentIntent(req, res) {
@@ -49,7 +50,7 @@ export async function createPaymentIntent(req, res) {
             return res.status(400).json({ error: "Invalid order total" });
         }
 
-        // find or create the stripe customer
+        // find or create the stripe customer and first time there is no user stripe id so we have to create it and store it in the user object in the database
         let customer;
         if (user.stripeCustomerId) {
             // find the customer
@@ -64,12 +65,11 @@ export async function createPaymentIntent(req, res) {
                     userId: user._id.toString(),
                 },
             });
-
             // add the stripe customer ID to the  user object in the DB
             await User.findByIdAndUpdate(user._id, { stripeCustomerId: customer.id });
         }
 
-        // create payment intent
+        // create payment intent to display the stripe payment popup in the ui 
         const paymentIntent = await stripe.paymentIntents.create({
             amount: Math.round(total * 100), // convert to cents
             currency: "usd",

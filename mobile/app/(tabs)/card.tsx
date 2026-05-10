@@ -101,7 +101,7 @@ const CartScreen = () => {
         setPaymentLoading(false);
         return;
       }
-      
+
       // present payment sheet
       const { error: presentError } = await presentPaymentSheet();
       if (presentError) {
